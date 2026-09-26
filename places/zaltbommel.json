@@ -1,0 +1,50 @@
+{
+  "$schema": "../schemas/place.schema.json",
+  "id": "zaltbommel",
+  "name": "Zaltbommel",
+  "country": "Netherlands",
+  "format": "A7",
+  "center": {
+    "lat": 51.8115,
+    "lon": 5.25
+  },
+  "radiusMeters": 1100,
+  "includeBuildings": false,
+  "note": "Small river-town layout experiment with public landmarks.",
+  "visits": {
+    "me": [],
+    "partner": [],
+    "shared": []
+  },
+  "landmarks": [
+    {
+      "name": "St Martin's Church",
+      "lat": 51.8120821,
+      "lon": 5.2523957
+    },
+    {
+      "name": "Maarten van Rossum House",
+      "lat": 51.8112961,
+      "lon": 5.2489948,
+      "labelDx": 16,
+      "labelDy": 34
+    },
+    {
+      "name": "Waterpoort",
+      "lat": 51.8146424,
+      "lon": 5.2469664,
+      "labelDx": -16,
+      "labelDy": -22
+    }
+  ],
+  "illustrations": {
+    "tourist": {
+      "image": "art/generated/zaltbommel-tourist-v1.png",
+      "opacity": 0.92
+    },
+    "storybook": {
+      "image": "art/generated/zaltbommel-tourist-v1.png",
+      "opacity": 0.62
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "../schemas/place.schema.json",
+  "id": "replace-me",
+  "name": "Large city",
+  "country": "Country",
+  "format": "A6",
+  "center": { "lat": 0, "lon": 0 },
+  "radiusMeters": 3500,
+  "includeBuildings": false,
+  "note": "",
+  "visits": { "me": [], "partner": [], "shared": [] },
+  "landmarks": []
+}

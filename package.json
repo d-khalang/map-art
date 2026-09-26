@@ -1,0 +1,20 @@
+{
+  "name": "travel-atlas-experiment",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OSM-grounded illustrated travel-map experiment with modular A6/A7 outputs.",
+  "scripts": {
+    "test": "node --test",
+    "fetch": "node atlas.mjs fetch",
+    "render": "node atlas.mjs render",
+    "experiment": "node atlas.mjs experiment",
+    "watch": "node atlas.mjs watch"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}

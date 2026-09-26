@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+
+# Generated maps, fetched data, reports, and test output
+cache/
+output/
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local configuration and environment secrets
+.env
+.env.*
+!.env.example
+.npmrc
+*.local
+*.local.*
+
+# Credentials and private key material
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+credentials*.json
+service-account*.json
+
+# Personal map data and private artwork
+private/
+personal/
+places/private/
+art/private/
+*.private.json
+*.personal.json
+*.secret.json
+
+# Internal agent notes and handoffs
+.agents/
+.codex/
+HANDOFF.md
+*_HANDOFF.md
+
+# Editors, operating systems, and temporary files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*.tmp
+tmp/
+temp/

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schemas/place.schema.json",
+  "id": "domodossola",
+  "name": "Domodossola",
+  "country": "Italy",
+  "format": "A7",
+  "center": {
+    "lat": 46.1111,
+    "lon": 8.297
+  },
+  "radiusMeters": 1700,
+  "includeBuildings": false,
+  "note": "Compact mountain-town layout experiment with public landmarks.",
+  "visits": {
+    "me": [],
+    "partner": [],
+    "shared": []
+  },
+  "landmarks": [
+    {
+      "name": "Piazza Mercato",
+      "lat": 46.115977,
+      "lon": 8.2911789,
+      "labelDx": 16,
+      "labelDy": -24
+    },
+    {
+      "name": "Palazzo Silva",
+      "lat": 46.1161755,
+      "lon": 8.2905819,
+      "labelDx": -16,
+      "labelDy": 34
+    },
+    {
+      "name": "Sacro Monte Calvario",
+      "lat": 46.1062285,
+      "lon": 8.2885789,
+      "labelDx": 16,
+      "labelDy": -22
+    }
+  ],
+  "illustrations": {
+    "tourist": {
+      "image": "art/generated/domodossola-tourist-v2.png",
+      "opacity": 0.92
+    },
+    "storybook": {
+      "image": "art/generated/domodossola-tourist-v2.png",
+      "opacity": 0.68
+    }
+  }
+}

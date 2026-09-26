@@ -1,0 +1,37 @@
+{
+  "$schema": "../schemas/style.schema.json",
+  "id": "storybook",
+  "palette": {
+    "paper": "#F7E8CF",
+    "ink": "#263A38",
+    "muted": "#746958",
+    "water": "#68ACC1",
+    "park": "#AFC579",
+    "building": "#E2B887",
+    "accent": "#C84447"
+  },
+  "roadWidths": {
+    "motorway": 3.4,
+    "primary": 2.7,
+    "secondary": 2.0,
+    "local": 1.2,
+    "minor": 0.7,
+    "rail": 0.9
+  },
+  "waterWidths": {
+    "river": 18,
+    "canal": 5,
+    "stream": 3
+  },
+  "detail": {
+    "showMinorRoads": false,
+    "showBuildings": true,
+    "maxPoiLabels": 3
+  },
+  "ai": {
+    "strength": "high",
+    "underlaySaturation": 0.5,
+    "prompt": "Create a warm storybook tourist-map illustration inside the supplied geographic structure. Exaggerate vegetation, roofs, boats, trams, and local atmosphere, but keep every main road, river, coast, bridge, and landmark anchor in its supplied position. Do not add text or new transport connections.",
+    "protectedGeometry": ["primary-roads", "rail", "water-edges", "bridges", "landmark-anchors", "title-safe-area", "footer-safe-area"]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../schemas/place.schema.json",
+  "id": "utrecht",
+  "name": "Utrecht",
+  "country": "Netherlands",
+  "format": "A6",
+  "center": {
+    "lat": 52.0907006,
+    "lon": 5.1215634
+  },
+  "radiusMeters": 3000,
+  "includeBuildings": false,
+  "note": "Dense-city layout experiment with public landmarks.",
+  "visits": {
+    "me": [],
+    "partner": [],
+    "shared": []
+  },
+  "landmarks": [
+    {
+      "name": "Dom Tower",
+      "lat": 52.0906531,
+      "lon": 5.1213086
+    },
+    {
+      "name": "Rietveld Schröder House",
+      "lat": 52.0853302,
+      "lon": 5.1475754
+    },
+    {
+      "name": "Railway Museum",
+      "lat": 52.0877182,
+      "lon": 5.1319832,
+      "labelDx": 16,
+      "labelDy": 34
+    }
+  ],
+  "illustrations": {
+    "tourist": {
+      "image": "art/generated/utrecht-tourist-v1.png",
+      "opacity": 0.92
+    }
+  }
+}

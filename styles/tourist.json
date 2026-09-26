@@ -1,0 +1,37 @@
+{
+  "$schema": "../schemas/style.schema.json",
+  "id": "tourist",
+  "palette": {
+    "paper": "#F3EBDD",
+    "ink": "#273632",
+    "muted": "#706B61",
+    "water": "#82B9C5",
+    "park": "#B9C98F",
+    "building": "#E0C9AA",
+    "accent": "#D75B3F"
+  },
+  "roadWidths": {
+    "motorway": 3.2,
+    "primary": 2.5,
+    "secondary": 1.9,
+    "local": 1.15,
+    "minor": 0.7,
+    "rail": 0.85
+  },
+  "waterWidths": {
+    "river": 14,
+    "canal": 7,
+    "stream": 4
+  },
+  "detail": {
+    "showMinorRoads": true,
+    "showBuildings": true,
+    "maxPoiLabels": 3
+  },
+  "ai": {
+    "strength": "medium",
+    "underlaySaturation": 0.28,
+    "prompt": "Transform only the open illustrative regions into a charming editorial tourist map with hand-painted neighbourhood texture, trees, water, and small local objects. Keep the supplied road and water geometry spatially aligned. Do not invent streets, bridges, labels, borders, or landmarks. Add no text. Leave calm negative space around the title and footer.",
+    "protectedGeometry": ["roads", "rail", "water-edges", "landmark-anchors", "title-safe-area", "footer-safe-area"]
+  }
+}
