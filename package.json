@@ -1,15 +1,14 @@
 {
-  "name": "travel-atlas-experiment",
-  "version": "0.1.0",
+  "name": "travel-atlas",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "OSM-grounded illustrated travel-map experiment with modular A6/A7 outputs.",
+  "description": "Illustrated, OSM-accurate travel maps printed as A6/A7 wall cards.",
   "scripts": {
     "test": "node --test",
     "fetch": "node atlas.mjs fetch",
     "render": "node atlas.mjs render",
-    "experiment": "node atlas.mjs experiment",
-    "watch": "node atlas.mjs watch"
+    "wall": "node atlas.mjs wall"
   },
   "engines": {
     "node": ">=20"

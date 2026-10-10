@@ -3,85 +3,133 @@
   "$id": "place.schema.json",
   "title": "Travel atlas place",
   "type": "object",
-  "required": ["id", "name", "country", "format", "center", "radiusMeters", "visits"],
+  "required": [
+    "id",
+    "name",
+    "country",
+    "format",
+    "center",
+    "radiusMeters",
+    "visits"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
-    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-    "name": { "type": "string", "minLength": 1 },
-    "country": { "type": "string", "minLength": 1 },
-    "format": { "enum": ["A6", "A7"] },
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "country": {
+      "type": "string",
+      "minLength": 1
+    },
+    "format": {
+      "enum": [
+        "A6",
+        "A7"
+      ]
+    },
     "center": {
       "type": "object",
-      "required": ["lat", "lon"],
+      "required": [
+        "lat",
+        "lon"
+      ],
       "properties": {
-        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
-        "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
       },
       "additionalProperties": false
     },
-    "radiusMeters": { "type": "integer", "minimum": 300, "maximum": 15000 },
-    "includeBuildings": { "type": "boolean" },
-    "note": { "type": "string" },
+    "radiusMeters": {
+      "type": "integer",
+      "minimum": 300,
+      "maximum": 15000
+    },
+    "note": {
+      "type": "string"
+    },
     "visits": {
       "type": "object",
-      "required": ["me", "partner", "shared"],
+      "required": [
+        "me",
+        "partner",
+        "shared"
+      ],
       "properties": {
-        "me": { "type": "array", "items": { "type": "string" } },
-        "partner": { "type": "array", "items": { "type": "string" } },
-        "shared": { "type": "array", "items": { "type": "string" } }
+        "me": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "partner": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shared": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "'shared' = travelled together at the same time (sun and moon are linked); 'me' = sun; 'partner' = moon."
     },
     "landmarks": {
       "type": "array",
       "maxItems": 5,
       "items": {
         "type": "object",
-        "required": ["name", "lat", "lon"],
+        "required": [
+          "name",
+          "lat",
+          "lon"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "lat": { "type": "number" },
-          "lon": { "type": "number" },
-          "art": { "type": "string" },
-          "labelDx": { "type": "number" },
-          "labelDy": { "type": "number" }
-        },
-        "additionalProperties": false
-      }
-    },
-    "visitedPlaces": {
-      "type": "array",
-      "maxItems": 8,
-      "items": {
-        "type": "object",
-        "required": ["name", "lat", "lon", "by"],
-        "properties": {
-          "name": { "type": "string" },
-          "lat": { "type": "number" },
-          "lon": { "type": "number" },
-          "by": { "enum": ["me", "partner", "both"] },
-          "labelDx": { "type": "number" },
-          "labelDy": { "type": "number" }
-        },
-        "additionalProperties": false
-      }
-    },
-    "illustration": {
-      "type": "object",
-      "properties": {
-        "image": { "type": "string" },
-        "opacity": { "type": "number", "minimum": 0, "maximum": 1 }
-      },
-      "additionalProperties": false
-    },
-    "illustrations": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "required": ["image"],
-        "properties": {
-          "image": { "type": "string" },
-          "opacity": { "type": "number", "minimum": 0, "maximum": 1 }
+          "name": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "art": {
+            "type": "string"
+          },
+          "artWidthMm": {
+            "type": "number",
+            "minimum": 2,
+            "maximum": 30
+          },
+          "artDxMm": {
+            "type": "number",
+            "minimum": -30,
+            "maximum": 30
+          },
+          "artDyMm": {
+            "type": "number",
+            "minimum": -30,
+            "maximum": 30
+          }
         },
         "additionalProperties": false
       }

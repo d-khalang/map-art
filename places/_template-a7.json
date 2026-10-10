@@ -4,10 +4,16 @@
   "name": "Small town",
   "country": "Country",
   "format": "A7",
-  "center": { "lat": 0, "lon": 0 },
+  "center": {
+    "lat": 0,
+    "lon": 0
+  },
   "radiusMeters": 1400,
-  "includeBuildings": true,
   "note": "",
-  "visits": { "me": [], "partner": [], "shared": [] },
+  "visits": {
+    "me": [],
+    "partner": [],
+    "shared": []
+  },
   "landmarks": []
 }

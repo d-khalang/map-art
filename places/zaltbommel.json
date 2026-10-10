@@ -9,42 +9,36 @@
     "lon": 5.25
   },
   "radiusMeters": 1100,
-  "includeBuildings": false,
-  "note": "Small river-town layout experiment with public landmarks.",
   "visits": {
     "me": [],
     "partner": [],
-    "shared": []
+    "shared": [
+      "together"
+    ]
   },
   "landmarks": [
     {
       "name": "St Martin's Church",
       "lat": 51.8120821,
-      "lon": 5.2523957
+      "lon": 5.2523957,
+      "art": "art/landmarks/zaltbommel/st-martins-church-v1.png",
+      "artWidthMm": 5,
+      "artDxMm": 1.5
     },
     {
-      "name": "Maarten van Rossum House",
+      "name": "Stadskasteel",
       "lat": 51.8112961,
       "lon": 5.2489948,
-      "labelDx": 16,
-      "labelDy": 34
+      "art": "art/landmarks/zaltbommel/stadskasteel-v1.png",
+      "artWidthMm": 5,
+      "artDxMm": -1.5
     },
     {
       "name": "Waterpoort",
       "lat": 51.8146424,
       "lon": 5.2469664,
-      "labelDx": -16,
-      "labelDy": -22
+      "art": "art/landmarks/zaltbommel/waterpoort-v1.png",
+      "artWidthMm": 5.5
     }
-  ],
-  "illustrations": {
-    "tourist": {
-      "image": "art/generated/zaltbommel-tourist-v1.png",
-      "opacity": 0.92
-    },
-    "storybook": {
-      "image": "art/generated/zaltbommel-tourist-v1.png",
-      "opacity": 0.62
-    }
-  }
+  ]
 }

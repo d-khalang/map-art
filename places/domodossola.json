@@ -9,44 +9,36 @@
     "lon": 8.297
   },
   "radiusMeters": 1700,
-  "includeBuildings": false,
-  "note": "Compact mountain-town layout experiment with public landmarks.",
   "visits": {
     "me": [],
     "partner": [],
-    "shared": []
+    "shared": [
+      "together"
+    ]
   },
   "landmarks": [
     {
       "name": "Piazza Mercato",
       "lat": 46.115977,
       "lon": 8.2911789,
-      "labelDx": 16,
-      "labelDy": -24
+      "art": "art/landmarks/domodossola/piazza-mercato-v1.png",
+      "artWidthMm": 5,
+      "artDxMm": -3
     },
     {
       "name": "Palazzo Silva",
       "lat": 46.1161755,
       "lon": 8.2905819,
-      "labelDx": -16,
-      "labelDy": 34
+      "art": "art/landmarks/domodossola/palazzo-silva-v1.png",
+      "artWidthMm": 4.5,
+      "artDxMm": 3
     },
     {
       "name": "Sacro Monte Calvario",
       "lat": 46.1062285,
       "lon": 8.2885789,
-      "labelDx": 16,
-      "labelDy": -22
+      "art": "art/landmarks/domodossola/sacro-monte-calvario-v1.png",
+      "artWidthMm": 5.5
     }
-  ],
-  "illustrations": {
-    "tourist": {
-      "image": "art/generated/domodossola-tourist-v2.png",
-      "opacity": 0.92
-    },
-    "storybook": {
-      "image": "art/generated/domodossola-tourist-v2.png",
-      "opacity": 0.68
-    }
-  }
+  ]
 }
