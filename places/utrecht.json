@@ -9,36 +9,36 @@
     "lon": 5.1215634
   },
   "radiusMeters": 3000,
-  "includeBuildings": false,
-  "note": "Dense-city layout experiment with public landmarks.",
   "visits": {
     "me": [],
     "partner": [],
-    "shared": []
+    "shared": [
+      "together"
+    ]
   },
   "landmarks": [
     {
       "name": "Dom Tower",
       "lat": 52.0906531,
-      "lon": 5.1213086
+      "lon": 5.1213086,
+      "art": "art/landmarks/utrecht/dom-tower-v1.png",
+      "artWidthMm": 6.5,
+      "artDxMm": 2
     },
     {
       "name": "Rietveld Schröder House",
       "lat": 52.0853302,
-      "lon": 5.1475754
+      "lon": 5.1475754,
+      "art": "art/landmarks/utrecht/rietveld-schroder-house-v1.png",
+      "artWidthMm": 5.5
     },
     {
       "name": "Railway Museum",
       "lat": 52.0877182,
       "lon": 5.1319832,
-      "labelDx": 16,
-      "labelDy": 34
+      "art": "art/landmarks/utrecht/railway-museum-v1.png",
+      "artWidthMm": 6,
+      "artDxMm": 1
     }
-  ],
-  "illustrations": {
-    "tourist": {
-      "image": "art/generated/utrecht-tourist-v1.png",
-      "opacity": 0.92
-    }
-  }
+  ]
 }
