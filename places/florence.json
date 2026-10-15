@@ -1,0 +1,65 @@
+{
+  "$schema": "../schemas/place.schema.json",
+  "id": "florence",
+  "name": "Florence",
+  "country": "Italy",
+  "format": "A6",
+  "center": {
+    "lat": 43.7696,
+    "lon": 11.2558
+  },
+  "radiusMeters": 3000,
+  "visits": {
+    "me": [
+      "solo"
+    ],
+    "partner": [
+      "solo"
+    ],
+    "shared": []
+  },
+  "landmarks": [
+    {
+      "name": "Santa Maria del Fiore",
+      "lat": 43.7731,
+      "lon": 11.256,
+      "art": "art/landmarks/florence/santa-maria-del-fiore-v1.png",
+      "artWidthMm": 6.5,
+      "artDxMm": 2,
+      "artDyMm": -1
+    },
+    {
+      "name": "Ponte Vecchio",
+      "lat": 43.768,
+      "lon": 11.2532,
+      "art": "art/landmarks/florence/ponte-vecchio-v1.png",
+      "artWidthMm": 6.5,
+      "artDxMm": -2
+    },
+    {
+      "name": "Palazzo Vecchio",
+      "lat": 43.7694,
+      "lon": 11.2561,
+      "art": "art/landmarks/florence/palazzo-vecchio-v1.png",
+      "artWidthMm": 6,
+      "artDxMm": 2
+    },
+    {
+      "name": "Palazzo Pitti",
+      "lat": 43.7651,
+      "lon": 11.2501,
+      "art": "art/landmarks/florence/palazzo-pitti-v1.png",
+      "artWidthMm": 6,
+      "artDxMm": -2
+    },
+    {
+      "name": "Piazzale Michelangelo",
+      "lat": 43.7628,
+      "lon": 11.2651,
+      "art": "art/landmarks/florence/piazzale-michelangelo-v1.png",
+      "artWidthMm": 6,
+      "artDxMm": 2,
+      "artDyMm": -1
+    }
+  ]
+}

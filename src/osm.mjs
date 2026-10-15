@@ -1,4 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { performance } from "node:perf_hooks";
 import { ROOT } from "./config.mjs";
@@ -7,8 +8,24 @@ import { fetchBbox } from "./geo.mjs";
 const ENDPOINTS = [
   "https://overpass-api.de/api/interpreter",
   "https://overpass.private.coffee/api/interpreter",
-  "https://overpass.kumi.systems/api/interpreter"
+  "https://overpass.kumi.systems/api/interpreter",
+  "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
 ];
+
+// Client-side cap per request. Overpass only sends headers once the query is
+// done, so this must outlast the server-side [timeout:...] in the queries.
+const REQUEST_TIMEOUT_MS = 150000;
+const ROUNDS = 2;
+
+// Endpoints that failed this run are tried last for the following queries.
+const endpointOrder = [...ENDPOINTS];
+const demote = (endpoint) => {
+  endpointOrder.splice(endpointOrder.indexOf(endpoint), 1);
+  endpointOrder.push(endpoint);
+};
+
+const log = (message) => console.error(`[osm] ${message}`);
+const seconds = (ms) => `${(ms / 1000).toFixed(1)}s`;
 
 // Bump when the query changes so stale caches are refetched automatically.
 export const QUERY_VERSION = 3;
@@ -20,7 +37,7 @@ export function buildOverpassQuery(place) {
   // Paths and service roads are unreadable on a wide city sheet and make
   // the query far heavier, so they are only requested for compact maps.
   const minorRoads = place.radiusMeters <= 2000 ? "|service|footway|path|cycleway|track" : "";
-  return `[out:json][timeout:180][bbox:${bboxString(fetchBbox(place))}];
+  return `[out:json][timeout:120][bbox:${bboxString(fetchBbox(place))}];
 (
   way["highway"~"^(motorway|trunk|primary|secondary|tertiary|residential|unclassified|living_street|pedestrian${minorRoads})(_link)?$"];
   way["railway"~"^(rail|light_rail|tram|narrow_gauge)$"];
@@ -50,7 +67,7 @@ export function buildingQueries(place) {
         west: box.west + (box.east - box.west) * j / n,
         east: box.west + (box.east - box.west) * (j + 1) / n
       };
-      queries.push(`[out:json][timeout:180][bbox:${bboxString(tile)}];(way["building"];relation["building"];);out geom qt;`);
+      queries.push(`[out:json][timeout:120][bbox:${bboxString(tile)}];(way["building"];relation["building"];);out geom qt;`);
     }
   }
   return queries;
@@ -58,10 +75,13 @@ export function buildingQueries(place) {
 
 const wait = (ms) => new Promise((done) => setTimeout(done, ms));
 
-async function runQuery(query) {
+async function runQuery(query, label) {
   const errors = [];
-  for (let attempt = 0; attempt < 3; attempt++) {
-    for (const endpoint of ENDPOINTS) {
+  for (let round = 0; round < ROUNDS; round++) {
+    for (const endpoint of [...endpointOrder]) {
+      const host = new URL(endpoint).host;
+      const started = performance.now();
+      log(`${label}: requesting ${host}...`);
       try {
         const response = await fetch(endpoint, {
           method: "POST",
@@ -70,19 +90,47 @@ async function runQuery(query) {
             "User-Agent": "travel-atlas/1.0 (personal illustrated maps)"
           },
           body: new URLSearchParams({ data: query }),
-          signal: AbortSignal.timeout(240000)
+          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
         });
         if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
         const data = await response.json();
         if (!Array.isArray(data.elements)) throw new Error("Overpass response has no elements array.");
+        // Overpass reports its own timeouts/out-of-memory as a 200 with a remark.
+        if (data.remark && /error|timed out|out of memory/i.test(data.remark)) throw new Error(data.remark);
+        log(`${label}: ${data.elements.length} elements from ${host} in ${seconds(performance.now() - started)}`);
         return data.elements;
       } catch (error) {
-        errors.push(`${endpoint}: ${error.message}`);
+        const reason = error.name === "TimeoutError" ? `no response after ${seconds(REQUEST_TIMEOUT_MS)}` : error.message;
+        log(`${label}: ${host} failed after ${seconds(performance.now() - started)} (${reason})`);
+        errors.push(`${host}: ${reason}`);
+        demote(endpoint);
       }
     }
-    await wait(15000 * (attempt + 1));
+    if (round < ROUNDS - 1) {
+      log(`${label}: all endpoints failed, retrying in 20s...`);
+      await wait(20000);
+    }
   }
-  throw new Error(`Could not fetch OSM data. ${errors.join("; ")}`);
+  throw new Error(`Could not fetch OSM data (${label}). Finished queries are kept and reused on the next run. ${errors.join("; ")}`);
+}
+
+// Each finished query is saved, so a run that dies halfway resumes from there.
+const partsDir = (placeId) => resolve(ROOT, "cache", "osm", "parts", placeId);
+const partPath = (placeId, query) => resolve(partsDir(placeId), `${createHash("sha1").update(query).digest("hex").slice(0, 16)}.json`);
+
+async function runQueryCached(placeId, query, label) {
+  const path = partPath(placeId, query);
+  try {
+    const elements = JSON.parse(await readFile(path, "utf8"));
+    log(`${label}: reusing ${elements.length} elements from an earlier partial run`);
+    return elements;
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  const elements = await runQuery(query, label);
+  await mkdir(partsDir(placeId), { recursive: true });
+  await writeFile(path, JSON.stringify(elements));
+  return elements;
 }
 
 export function cachePath(placeId) {
@@ -112,8 +160,14 @@ export async function fetchOsm(place, { refresh = false } = {}) {
   const started = performance.now();
   const seen = new Set();
   const elements = [];
-  for (const query of [buildOverpassQuery(place), ...buildingQueries(place)]) {
-    for (const element of await runQuery(query)) {
+  const buildings = buildingQueries(place);
+  const queries = [
+    { label: "geography", query: buildOverpassQuery(place) },
+    ...buildings.map((query, i) => ({ label: `buildings ${i + 1}/${buildings.length}`, query }))
+  ];
+  log(`${place.id}: fetching ${queries.length} queries`);
+  for (const { label, query } of queries) {
+    for (const element of await runQueryCached(place.id, query, label)) {
       const key = `${element.type}${element.id}`;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -130,6 +184,7 @@ export async function fetchOsm(place, { refresh = false } = {}) {
   await mkdir(resolve(path, ".."), { recursive: true });
   await writeFile(path, `${JSON.stringify(payload)}
 `);
+  await rm(partsDir(place.id), { recursive: true, force: true });
   return { payload, cacheHit: false, durationMs: performance.now() - started };
 }
 

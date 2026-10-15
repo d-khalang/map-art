@@ -17,3 +17,8 @@ Stickers are isolated PNGs with a fully transparent background. The renderer add
 - **Zaltbommel — St Martin's Church:** large Gothic church with a massive unfinished flat-topped tower and red-brick nave; no spire.
 - **Zaltbommel — Stadskasteel:** red-brick fortified townhouse with stepped gables, small conical corner turrets, and patterned shutters.
 - **Zaltbommel — Waterpoort:** small modest Dutch red-brick gatehouse integrated into a town wall, one broad passage arch plus one adjacent narrower arch, compact stepped gable, shallow dark tiled roof, restrained blind brick arcades; no round towers, turrets, castle keep, battlements, or fantasy architecture.
+- **Florence — Santa Maria del Fiore:** Florence Cathedral complex with Brunelleschi's terracotta octagonal dome, Giotto's tall campanile bell tower, and polychrome marble facade.
+- **Florence — Ponte Vecchio:** medieval stone segmental arch bridge over the Arno river, multi-story pastel merchant houses/shops cantilevered on corbels, and the Vasari corridor.
+- **Florence — Palazzo Vecchio:** fortress town hall palace in Piazza della Signoria, rusticated stone battlements, and the soaring crenellated Arnolfo bell tower with clock face.
+- **Florence — Palazzo Pitti:** grand Renaissance palace in Oltrarno, monumental rusticated pietra forte stone block facade with three tiers of arched windows and balustrade.
+- **Florence — Piazzale Michelangelo:** panoramic terrace monument with the bronze statue replica of Michelangelo's David on its classical marble pedestal, stone balustrade, and cypress trees.
